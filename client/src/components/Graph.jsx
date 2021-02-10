@@ -21,7 +21,7 @@ class Graph extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.selectedStockDates !== prevProps.selectedStockDates) {
+    if (this.props.selectedStock !== prevProps.selectedStock) {
       this.setState({
         config: {
           type: 'line',
@@ -38,12 +38,11 @@ class Graph extends React.Component {
     }
   }
 
-
-
   render() {
     return (
       <div>
-        <ZingChart data={this.state.config}/>
+        <h4>{this.props.selectedStock}</h4>
+        <ZingChart data={this.state.config} width="80%"/>
       </div>
     );
   }
