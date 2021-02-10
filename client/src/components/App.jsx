@@ -23,6 +23,7 @@ class App extends React.Component {
 
     this.tickerSubmissionHandler = this.tickerSubmissionHandler.bind(this);
     this.saveStock = this.saveStock.bind(this);
+    this.deleteStock = this.deleteStock.bind(this);
   }
 
   componentDidMount() {}
@@ -74,11 +75,20 @@ class App extends React.Component {
 
   saveStock(e, stock) {
     e.preventDefault();
+    const formattedStock = stock.toUpperCase();
     if (this.state.savedStocks.indexOf(stock) === -1) {
       this.setState({
-        savedStocks: [...this.state.savedStocks, stock]
+        savedStocks: [...this.state.savedStocks, formattedStock]
       })
     }
+  }
+
+  deleteStock(e, stock) {
+    e.preventDefault();
+    let updatedSavedStocks = this.state.savedStocks.filter( savedStock => savedStock !== stock )
+    this.setState({
+      savedStocks: updatedSavedStocks
+    });
   }
 
   render () {
@@ -99,7 +109,10 @@ class App extends React.Component {
           returnOnEquity={this.state.returnOnEquity}
           saveStock={this.saveStock}
         />
-        <SavedStocks savedStocks={this.state.savedStocks}/>
+        <SavedStocks
+          savedStocks={this.state.savedStocks}
+          deleteStock={this.deleteStock}
+        />
       </div>
     )
   }
