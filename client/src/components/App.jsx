@@ -27,17 +27,25 @@ class App extends React.Component {
     document.getElementById('ticker').value = '';
     axios.get(`/prices/${tickerSymbol}`)
       .then((prices) => {
-        const priceData = prices.data["Monthly Time Series"]
+        const priceData = prices.data['Monthly Time Series']
         const dates = [];
         const pastPrices = [];
         for (let date in priceData) {
           dates.push(date);
-          pastPrices.push(priceData[date]);
+          pastPrices.push(parseFloat(priceData[date]['4. close']));
+        }
+        dates.reverse();
+        pastPrices.reverse();
+        let trimmedDates = dates;
+        let trimmedpastPrices = pastPrices;
+        if (dates.length > 60) {
+          trimmedDates = trimmedDates.slice(-60);
+          trimmedpastPrices = trimmedpastPrices.slice(-60);
         }
         this.setState({
           selectedStock: tickerSymbol,
-          selectedStockDates: dates,
-          selectedStockPrices: pastPrices
+          selectedStockDates: trimmedDates,
+          selectedStockPrices: trimmedpastPrices
         })
       })
       .catch((err) => {
