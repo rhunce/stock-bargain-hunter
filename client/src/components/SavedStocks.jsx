@@ -7,7 +7,7 @@ function SavedStocks(props) {
       <p>SAVED STOCKS</p>
       {props.savedStocks.map((stock) => {
         const formattedStock = stock.toUpperCase();
-        return <Stock key={formattedStock} formattedStock={formattedStock}/>
+        return <Stock key={formattedStock} formattedStock={formattedStock} deleteStock={props.deleteStock}/>
       })}
     </div>
   )
