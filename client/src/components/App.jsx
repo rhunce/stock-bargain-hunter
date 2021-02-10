@@ -12,7 +12,6 @@ class App extends React.Component {
     this.state = {
       user: '',
       selectedStock: '',
-      selectedStockCompanyName: '',
       selectedStockDates: [],
       selectedStockPrices: [],
       savedStocks: [],
@@ -23,6 +22,7 @@ class App extends React.Component {
     }
 
     this.tickerSubmissionHandler = this.tickerSubmissionHandler.bind(this);
+    this.saveStock = this.saveStock.bind(this);
   }
 
   componentDidMount() {}
@@ -59,22 +59,26 @@ class App extends React.Component {
 
       axios.get(`/fundamentals/${tickerSymbol}`)
       .then((fundamentals) => {
-        const selectedStockCompanyName = fundamentals.data.Name;
-        const priceToEarningsRatio = parseFloat(fundamentals.data.PERatio);
-        const priceToBookValueRatio = parseFloat(fundamentals.data.PriceToBookRatio);
-        const returnOnAssets = parseFloat(fundamentals.data.ReturnOnAssetsTTM);
-        const returnOnEquity = parseFloat(fundamentals.data.ReturnOnEquityTTM);
         this.setState({
-          selectedStockCompanyName,
-          priceToEarningsRatio,
-          priceToBookValueRatio,
-          returnOnAssets,
-          returnOnEquity
+          selectedStockCompanyName: fundamentals.data.Name,
+          priceToEarningsRatio: parseFloat(fundamentals.data.PERatio),
+          priceToBookValueRatio: parseFloat(fundamentals.data.PriceToBookRatio),
+          returnOnAssets: parseFloat(fundamentals.data.ReturnOnAssetsTTM),
+          returnOnEquity: parseFloat(fundamentals.data.ReturnOnEquityTTM)
         })
       })
       .catch((err) => {
         console.error(err);
       });
+  }
+
+  saveStock(e, stock) {
+    e.preventDefault();
+    if (this.state.savedStocks.indexOf(stock) === -1) {
+      this.setState({
+        savedStocks: [...this.state.savedStocks, stock]
+      })
+    }
   }
 
   render () {
@@ -88,13 +92,14 @@ class App extends React.Component {
           selectedStockPrices={this.state.selectedStockPrices}
         />
         <Table
-          selectedStockCompanyName={this.state.selectedStockCompanyName}
+          selectedStock={this.state.selectedStock}
           priceToEarningsRatio={this.state.priceToEarningsRatio}
           priceToBookValueRatio={this.state.priceToBookValueRatio}
           returnOnAssets={this.state.returnOnAssets}
           returnOnEquity={this.state.returnOnEquity}
+          saveStock={this.saveStock}
         />
-        <SavedStocks />
+        <SavedStocks savedStocks={this.state.savedStocks}/>
       </div>
     )
   }

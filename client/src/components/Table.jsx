@@ -15,12 +15,6 @@ class Table extends React.Component {
 
   componentDidMount() {}
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.selectedStockCompanyName !== prevProps.selectedStockCompanyName) {
-
-  //   }
-  // }
-
   targetValueChangeHandler(e) {
     this.setState({
       [e.target.name]: parseFloat(e.target.value)
@@ -106,6 +100,12 @@ class Table extends React.Component {
             </td>
           </tr>
         </table>
+        <button
+          type="button"
+          disabled={!this.props.selectedStock}
+          onClick={(e) => {this.props.saveStock(e, this.props.selectedStock)}}>
+          Save Stock!
+        </button>
       </div>
     )
   }

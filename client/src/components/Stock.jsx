@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Stock() {
+function Stock(props) {
   return (
     <div>
-      <p>STOCK</p>
+      <p>{props.formattedStock}</p>
     </div>
   )
 }

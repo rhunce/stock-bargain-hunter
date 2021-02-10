@@ -1,13 +1,14 @@
 import React from 'react';
 import Stock from './Stock.jsx';
 
-function SavedStocks() {
+function SavedStocks(props) {
   return (
     <div>
       <p>SAVED STOCKS</p>
-      <Stock />
-      <Stock />
-      <Stock />
+      {props.savedStocks.map((stock) => {
+        const formattedStock = stock.toUpperCase();
+        return <Stock key={formattedStock} formattedStock={formattedStock}/>
+      })}
     </div>
   )
 }
