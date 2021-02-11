@@ -26,7 +26,18 @@ class App extends React.Component {
     this.deleteStock = this.deleteStock.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    axios.get('/savedstocks')
+      .then((stocks) => {
+        const allSavedStocks = stocks.data;
+        this.setState({
+          savedStocks: allSavedStocks
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
 
   tickerSubmissionHandler(e, tickerSymbol) {
     e.preventDefault();
@@ -48,8 +59,9 @@ class App extends React.Component {
           trimmedDates = trimmedDates.slice(-60);
           trimmedpastPrices = trimmedpastPrices.slice(-60);
         }
+        const formattedTickerSymbol = tickerSymbol.toUpperCase();
         this.setState({
-          selectedStock: tickerSymbol,
+          selectedStock: formattedTickerSymbol,
           selectedStockDates: trimmedDates,
           selectedStockPrices: trimmedpastPrices
         })
@@ -75,20 +87,31 @@ class App extends React.Component {
 
   saveStock(e, stock) {
     e.preventDefault();
-    const formattedStock = stock.toUpperCase();
-    if (this.state.savedStocks.indexOf(stock) === -1) {
-      this.setState({
-        savedStocks: [...this.state.savedStocks, formattedStock]
+    axios.post('/savestock', { stock })
+      .then((savedStock) => {
+        if (this.state.savedStocks.indexOf(stock) === -1) {
+          this.setState({
+            savedStocks: [...this.state.savedStocks, savedStock.data]
+          })
+        }
       })
-    }
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   deleteStock(e, stock) {
     e.preventDefault();
-    let updatedSavedStocks = this.state.savedStocks.filter( savedStock => savedStock !== stock )
-    this.setState({
-      savedStocks: updatedSavedStocks
-    });
+    axios.delete('/stocktodelete', { params: { stock } })
+      .then(() => {
+        let updatedSavedStocks = this.state.savedStocks.filter( savedStock => savedStock.stock !== stock )
+        this.setState({
+          savedStocks: updatedSavedStocks
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   render () {

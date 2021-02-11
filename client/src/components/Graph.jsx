@@ -42,7 +42,7 @@ class Graph extends React.Component {
     return (
       <div>
         <h4>{this.props.selectedStock}</h4>
-        <ZingChart data={this.state.config} width="80%"/>
+        <ZingChart data={this.state.config} width="75%"/>
       </div>
     );
   }
