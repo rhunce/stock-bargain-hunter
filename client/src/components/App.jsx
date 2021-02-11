@@ -116,28 +116,32 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
-        <Header />
-        <StockSelector tickerSubmissionHandler={this.tickerSubmissionHandler}/>
-        <Graph
-          selectedStock={this.state.selectedStock}
-          selectedStockDates={this.state.selectedStockDates}
-          selectedStockPrices={this.state.selectedStockPrices}
-        />
-        <Table
-          selectedStock={this.state.selectedStock}
-          priceToEarningsRatio={this.state.priceToEarningsRatio}
-          priceToBookValueRatio={this.state.priceToBookValueRatio}
-          returnOnAssets={this.state.returnOnAssets}
-          returnOnEquity={this.state.returnOnEquity}
-          saveStock={this.saveStock}
-        />
-        <SavedStocks
-          savedStocks={this.state.savedStocks}
-          deleteStock={this.deleteStock}
-        />
-        <div>
-          <p><a href={"mailto:someone@example.com?subject=Check Out These Stonks!&body=I found some potential bargains! Take a look at these: " + this.state.savedStocks.map((currentStock) => {return currentStock.stock})}><button type="button" disabled={!this.state.savedStocks.length}>Share These Stonks!</button></a></p>
+      <div className="wrapper">
+        <div className="container">
+          <Header />
+          <StockSelector tickerSubmissionHandler={this.tickerSubmissionHandler}/>
+          <Graph
+            selectedStock={this.state.selectedStock}
+            selectedStockDates={this.state.selectedStockDates}
+            selectedStockPrices={this.state.selectedStockPrices}
+          />
+        </div>
+        <div className="container">
+          <Table
+            selectedStock={this.state.selectedStock}
+            priceToEarningsRatio={this.state.priceToEarningsRatio}
+            priceToBookValueRatio={this.state.priceToBookValueRatio}
+            returnOnAssets={this.state.returnOnAssets}
+            returnOnEquity={this.state.returnOnEquity}
+            saveStock={this.saveStock}
+          />
+          <SavedStocks
+            savedStocks={this.state.savedStocks}
+            deleteStock={this.deleteStock}
+          />
+          <div>
+            <p><a href={"mailto:someone@example.com?subject=Check Out These Stonks!&body=I found some potential bargains! Take a look at these: " + this.state.savedStocks.map((currentStock) => {return currentStock.stock})}><button type="button" disabled={!this.state.savedStocks.length}>Share These Stonks!</button></a></p>
+          </div>
         </div>
       </div>
     )
