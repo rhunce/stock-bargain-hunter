@@ -2,17 +2,30 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/stockbargainhunter');
 
-// let repoSchema = mongoose.Schema({
-//   repo_id: { type: Number, unique: true },
-//   repo_name: String,
-//   repo_owner_login: String,
-//   repo_stargazers_count: Number
-// });
+let stocksSchema = mongoose.Schema({
+  stock: String
+});
 
-// let Repo = mongoose.model('Repo', repoSchema);
+let Stocks = mongoose.model('stock', stocksSchema);
 
-// let retrieve = () => {
-//   return Repo.find({}).sort('-repo_stargazers_count').limit(5).exec();
-// }
+const retrieve = () => {
+  return Stocks.find().limit(20).exec();
+}
 
-module.exports = {}
+const save = (stock) => {
+  const formattedStock = stock.toUpperCase();
+  const query = { stock: formattedStock };
+  const update = { stock: formattedStock };
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+  return Stocks.findOneAndUpdate(query, update, options);
+}
+
+const deleteStock = (stock) => {
+  return Stocks.deleteOne({ stock }).exec();
+}
+
+module.exports = {
+  retrieve,
+  save,
+  deleteStock
+}
