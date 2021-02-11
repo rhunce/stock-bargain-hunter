@@ -126,21 +126,25 @@ class App extends React.Component {
             selectedStockPrices={this.state.selectedStockPrices}
           />
         </div>
-        <div className="container">
-          <Table
-            selectedStock={this.state.selectedStock}
-            priceToEarningsRatio={this.state.priceToEarningsRatio}
-            priceToBookValueRatio={this.state.priceToBookValueRatio}
-            returnOnAssets={this.state.returnOnAssets}
-            returnOnEquity={this.state.returnOnEquity}
-            saveStock={this.saveStock}
-          />
-          <SavedStocks
-            savedStocks={this.state.savedStocks}
-            deleteStock={this.deleteStock}
-          />
-          <div>
-            <p><a href={"mailto:someone@example.com?subject=Check Out These Stonks!&body=I found some potential bargains! Take a look at these: " + this.state.savedStocks.map((currentStock) => {return currentStock.stock})}><button type="button" disabled={!this.state.savedStocks.length}>Share These Stonks!</button></a></p>
+        <div>
+          <div className="container">
+            <Table
+              selectedStock={this.state.selectedStock}
+              priceToEarningsRatio={this.state.priceToEarningsRatio}
+              priceToBookValueRatio={this.state.priceToBookValueRatio}
+              returnOnAssets={this.state.returnOnAssets}
+              returnOnEquity={this.state.returnOnEquity}
+              saveStock={this.saveStock}
+            />
+          </div>
+          <div className="container">
+            <SavedStocks
+              savedStocks={this.state.savedStocks}
+              deleteStock={this.deleteStock}
+            />
+            <div>
+              <p><a href={"mailto:someone@example.com?subject=Check Out These Stonks!&body=I found some potential bargains! Take a look at these: " + this.state.savedStocks.map((currentStock) => {return currentStock.stock})}><button type="button" disabled={!this.state.savedStocks.length}>Share These Stonks!</button></a></p>
+            </div>
           </div>
         </div>
       </div>
