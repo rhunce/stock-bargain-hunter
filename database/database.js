@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/stockbargainhunter');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/stockbargainhunter', {
+  useMongoClient: true
+});
 
 let stocksSchema = mongoose.Schema({
   stock: String
