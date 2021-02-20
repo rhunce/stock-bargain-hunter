@@ -21,7 +21,7 @@ class StockSelector extends React.Component {
   render () {
     return (
       <form>
-        <label htmlFor="ticker">Type in stonk ticker symbol here:</label>
+        <label htmlFor="ticker">Type in stock ticker symbol here:</label>
         <input type="text" id="ticker" name="ticker" onChange={this.tickerSymbolInputChangeHandler}/>
         <button type="button" onClick={(e) => {this.props.tickerSubmissionHandler(e, this.state.tickerSymbol)}}>Search</button>
         <span>&#40;Case insensitive&#41;</span>
