@@ -104,7 +104,7 @@ class Table extends React.Component {
           type="button"
           disabled={!this.props.selectedStock}
           onClick={(e) => {this.props.saveStock(e, this.props.selectedStock)}}>
-          Save Stonk!
+          Save Stock!
         </button>
       </div>
     )
