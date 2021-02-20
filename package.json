@@ -8,7 +8,7 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/server.js"
   },
-  "author": "Beth Johnson",
+  "author": "Raymond Hunce",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
