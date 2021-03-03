@@ -7,7 +7,7 @@ Mini full-stack application connected to a 3rd party API to get real-time stock 
 
 (2) Open it in VS Code (or whatever IDE you use) like you normally would.
 
-(3) To be able to make HTTP requests to the API in this repo, you must create and use a Alpha Vantage API Token. Here is how to obtain your Token:
+(3) To be able to make HTTP requests to the API in this repo, you must create and use an Alpha Vantage API Token. Here is how to obtain your Token:
 - Go to: https://www.alphavantage.co/
 - Click "Get Your Free API Key Today"
 - Follow the prompts and get your API key
