@@ -143,7 +143,7 @@ class App extends React.Component {
               deleteStock={this.deleteStock}
             />
             <div>
-              <p><a href={"mailto:someone@example.com?subject=Check Out These Stonks!&body=I found some potential bargains! Take a look at these: " + this.state.savedStocks.map((currentStock) => {return currentStock.stock})}><button type="button" disabled={!this.state.savedStocks.length}>Share These Stocks!</button></a></p>
+              <p><a href={"mailto:someone@example.com?subject=Check Out These Stocks!&body=I found some potential bargains! Take a look at these: " + this.state.savedStocks.map((currentStock) => {return currentStock.stock})}><button type="button" disabled={!this.state.savedStocks.length}>Share These Stocks!</button></a></p>
             </div>
           </div>
         </div>
